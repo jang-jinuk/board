@@ -1,9 +1,9 @@
-package com.post.board.post;
+package com.post.board.post.dto;
 
 import lombok.Getter;
 
 @Getter
-public class PostCreateRequest {
+public class PostUpdateRequest {
     private String title;
     private String content;
 }

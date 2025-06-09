@@ -1,6 +1,8 @@
 package com.post.board.post;
 
 import com.post.board.member.Member;
+import com.post.board.post.dto.PostCreateRequest;
+import com.post.board.post.dto.PostUpdateRequest;
 import com.post.board.reply.Reply;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -43,5 +45,11 @@ public class Post {
         this.title = postCreateRequest.getTitle();
         this.content = postCreateRequest.getContent();
         this.createAt = LocalDateTime.now();
+    }
+
+    public void update(PostUpdateRequest postUpdateRequest) {
+        this.title = postUpdateRequest.getTitle();
+        this.content = postUpdateRequest.getContent();
+        this.updateAt = LocalDateTime.now();
     }
 }

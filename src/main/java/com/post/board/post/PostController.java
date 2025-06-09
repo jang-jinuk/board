@@ -1,5 +1,7 @@
 package com.post.board.post;
 
+import com.post.board.post.dto.PostCreateRequest;
+import com.post.board.post.dto.PostUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,5 +17,11 @@ public class PostController {
     @PostMapping
     public Map<String, Long> createPost(@RequestBody PostCreateRequest postCreateRequest) {
         return Map.of("postId", postService.createPost(postCreateRequest));
+    }
+
+    @PatchMapping("/{id}")
+    public Map<String, Long> updatePost(@PathVariable("id") Long id,
+                                        @RequestBody PostUpdateRequest postUpdateRequest) {
+        return Map.of("postId", postService.updatePost(id, postUpdateRequest));
     }
 }
