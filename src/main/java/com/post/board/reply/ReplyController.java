@@ -1,11 +1,10 @@
 package com.post.board.reply;
 
 import com.post.board.reply.dto.ReplyCreateRequest;
+import com.post.board.reply.dto.ReplyUpdateRequest;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -18,8 +17,15 @@ public class ReplyController {
 
     @PostMapping
     public Map<String, Long> createReply(@RequestBody ReplyCreateRequest replyCreateRequest) {
-        Reply reply = replyService.createReply(replyCreateRequest);
-        return Map.of("postId", reply.getPost().getId());
+        replyService.createReply(replyCreateRequest);
+        return Map.of("postId", replyCreateRequest.getPostId());
     }
 
+    @PatchMapping("/{replyId}")
+    public Map<String, Long> updateReply(@PathParam("replyId") Long replyId,
+                                         @PathParam("postId") Long postId,
+                                         @RequestBody ReplyUpdateRequest replyUpdateRequest) {
+        replyService.updateReply(replyId, replyUpdateRequest);
+        return Map.of("postId", postId);
+    }
 }
