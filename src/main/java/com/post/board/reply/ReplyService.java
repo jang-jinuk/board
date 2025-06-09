@@ -30,4 +30,8 @@ public class ReplyService {
         foundReply.update(replyUpdateRequest);
         replyRepository.save(foundReply);
     }
+
+    public void deleteReply(Long replyId) {
+        replyRepository.deleteById(replyId);
+    }
 }

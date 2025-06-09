@@ -28,4 +28,9 @@ public class ReplyController {
         replyService.updateReply(replyId, replyUpdateRequest);
         return Map.of("postId", postId);
     }
+
+    @DeleteMapping("/{replyId}")
+    public void deleteReply(@PathParam("replyId") Long replyId) {
+        replyService.deleteReply(replyId);
+    }
 }
