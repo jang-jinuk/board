@@ -47,4 +47,10 @@ public class PostController {
                                         @RequestBody PostUpdateRequest postUpdateRequest) {
         return Map.of("postId", postService.updatePost(id, postUpdateRequest));
     }
+
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable Long id) {
+        replyService.deleteReplyByPost(id);
+        postService.deletePost(id);
+    }
 }

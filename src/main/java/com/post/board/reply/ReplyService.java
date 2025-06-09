@@ -6,6 +6,7 @@ import com.post.board.reply.dto.ReplyCreateRequest;
 import com.post.board.reply.dto.ReplyUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,13 +26,20 @@ public class ReplyService {
         replyRepository.save(new Reply(replyCreateRequest, foudPost));
     }
 
+    @Transactional
     public void updateReply(Long replyId, ReplyUpdateRequest replyUpdateRequest) {
         Reply foundReply = replyRepository.findById(replyId).get();
         foundReply.update(replyUpdateRequest);
         replyRepository.save(foundReply);
     }
 
+    @Transactional
     public void deleteReply(Long replyId) {
         replyRepository.deleteById(replyId);
+    }
+
+    @Transactional
+    public void deleteReplyByPost(Long postId) {
+        replyRepository.deleteAllByPostId(postId);
     }
 }
