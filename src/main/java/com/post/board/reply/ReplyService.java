@@ -6,6 +6,8 @@ import com.post.board.reply.dto.ReplyCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ReplyService {
@@ -13,8 +15,12 @@ public class ReplyService {
     private final ReplyRepository replyRepository;
     private final PostRepository postRepository;
 
-    public Reply createReply(ReplyCreateRequest replyCreateRequest) {
+    public List<Reply> findReplyListByPost(Post post) {
+        return replyRepository.findReplyByPost(post);
+    }
+
+    public void createReply(ReplyCreateRequest replyCreateRequest) {
         Post foudPost = postRepository.findById(replyCreateRequest.getPostId()).get();
-        return replyRepository.save(new Reply(replyCreateRequest, foudPost));
+        replyRepository.save(new Reply(replyCreateRequest, foudPost));
     }
 }

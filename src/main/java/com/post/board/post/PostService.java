@@ -1,7 +1,6 @@
 package com.post.board.post;
 
 import com.post.board.post.dto.PostCreateRequest;
-import com.post.board.post.dto.PostDetailResponse;
 import com.post.board.post.dto.PostUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,14 +18,8 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public PostDetailResponse findPost(Long id) {
-        Post foundPost = postRepository.findById(id).get();
-        return PostDetailResponse.builder()
-                .title(foundPost.getTitle())
-                .content(foundPost.getContent())
-                .createAt(foundPost.getCreateAt())
-                .updateAt(foundPost.getUpdateAt())
-                .build();
+    public Post findPost(Long id) {
+        return postRepository.findById(id).get();
     }
 
     public Long createPost(PostCreateRequest postCreateRequest) {

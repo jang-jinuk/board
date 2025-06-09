@@ -3,13 +3,11 @@ package com.post.board.post;
 import com.post.board.member.Member;
 import com.post.board.post.dto.PostCreateRequest;
 import com.post.board.post.dto.PostUpdateRequest;
-import com.post.board.reply.Reply;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -36,10 +34,6 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @OneToMany
-    @JoinColumn(name = "post_id")
-    private List<Reply> replies;
 
     public Post(PostCreateRequest postCreateRequest) {
         this.title = postCreateRequest.getTitle();
