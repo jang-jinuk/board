@@ -2,10 +2,15 @@ package com.post.board.reply;
 
 import com.post.board.member.Member;
 import com.post.board.post.Post;
+import com.post.board.reply.dto.ReplyCreateRequest;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "reply")
 public class Reply {
@@ -14,8 +19,8 @@ public class Reply {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "content")
+    private String content;
 
     @Column(name = "create_at")
     private LocalDateTime createAt;
@@ -30,4 +35,10 @@ public class Reply {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    public Reply(ReplyCreateRequest replyCreateRequest, Post post) {
+        this.content = replyCreateRequest.getContent();
+        this.createAt = LocalDateTime.now();
+        this.post = post;
+    }
 }
