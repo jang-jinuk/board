@@ -7,11 +7,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
+
+    public List<Post> findAllPost() {
+        return postRepository.findAll();
+    }
 
     public PostDetailResponse findPost(Long id) {
         Post foundPost = postRepository.findById(id).get();

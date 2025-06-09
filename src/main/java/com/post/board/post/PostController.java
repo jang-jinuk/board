@@ -6,6 +6,7 @@ import com.post.board.post.dto.PostUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,8 +17,13 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/{id}")
-    public PostDetailResponse getPost(@PathVariable("id") Long id) {
+    public PostDetailResponse getPost(@PathVariable Long id) {
         return postService.findPost(id);
+    }
+
+    @GetMapping
+    public List<Post> getPostList() {
+        return postService.findAllPost();
     }
 
     @PostMapping
@@ -26,7 +32,7 @@ public class PostController {
     }
 
     @PatchMapping("/{id}")
-    public Map<String, Long> updatePost(@PathVariable("id") Long id,
+    public Map<String, Long> updatePost(@PathVariable Long id,
                                         @RequestBody PostUpdateRequest postUpdateRequest) {
         return Map.of("postId", postService.updatePost(id, postUpdateRequest));
     }
